@@ -1,0 +1,6 @@
+framework module Pods_proydamiiTests {
+  umbrella header "Pods-proydamiiTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
