@@ -7,8 +7,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
 import FirebaseAuth
-import Firebase
 
 class SignUpViewController: UIViewController,  UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -35,6 +35,8 @@ class SignUpViewController: UIViewController,  UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var tipo: UIPickerView!
     var tpuser: [String] = [String]()
     
+    let db = Firestore.firestore()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,29 +57,62 @@ class SignUpViewController: UIViewController,  UIPickerViewDelegate, UIPickerVie
             if let email = email.text , let password = password.text {
                 Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                     let user = Auth.auth().currentUser
-                    //Auth.updateCurrentUser(<#T##self: Auth##Auth#>)
                     let changeRequest = user?.createProfileChangeRequest()
-                    changeRequest?.displayName = self.tiposelect
+                    changeRequest?.displayName = self.fullname.text
                     changeRequest?.commitChanges { (error) in
+                        self.alertFunc(msg: "Error al comitear cambios")
+                    print("+++++++++++ Comiteo de cambios +++++++++++")
                      print(error)
                     }
                     if let result = result , error == nil {
-                        self.navigationController?
-                            .pushViewController(HomeViewController(email: result.user.email!, name:self.tiposelect ), animated: true)
+                        self.db.collection("usuarios").document().setData([
+                            "nombreCompleto": self.fullname.text,
+                            "email": self.email.text,
+                            "tipo": self.tiposelect,
+                            "uid_id": result.user.uid
+                            
+                        ]) { [self] err in
+                            if let err = err {
+                               
+                                self.alertFunc(msg:"Error writing document: \(err)")
+                                print("Error writing document: \(err)")
+                            } else {
+                                let defaults = UserDefaults.standard
+                                //defaults.set(25, forKey: "Age")
+                                defaults.set(result.user.uid, forKey: "uid_id")
+                                defaults.set(self.fullname.text, forKey: "nombreCompleto")
+                                defaults.set(self.email.text, forKey: "email")
+                                defaults.set(self.tiposelect, forKey: "tipo")
+                                self.alertFunc(msg:"Document successfully written!")
+                                print("Document successfully written!")
+                            }
+                        }
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+
+                        let tabbar: UITabBarController? = (storyBoard.instantiateViewController(withIdentifier: "tabbar") as? UITabBarController)
+                        self.navigationController?.pushViewController(tabbar!, animated: true)
+
                     }else{
-                        let alertController = UIAlertController(title: "Aceptar", message: "Se ha producido un error registrando el usuario", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
-                        self.present(alertController, animated: true , completion: nil )
+//                        let alertController = UIAlertController(title: "Aceptar", message: "Se ha producido un error registrando el usuario", preferredStyle: .alert)
+//                        alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
+//                        self.present(alertController, animated: true , completion: nil )
+                        self.alertFunc(msg: "Se ha producido un error registrando el usuario")
                     }
                 }
             }
         }else{
-            let alertController = UIAlertController(title: "Aceptar", message: "Las contraseñas no coinciden, intente de nuevo pls", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
-            self.present(alertController, animated: true , completion: nil )
+//            let alertController = UIAlertController(title: "Aceptar", message: "Las contraseñas no coinciden, intente de nuevo pls", preferredStyle: .alert)
+//            alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
+//            self.present(alertController, animated: true , completion: nil )
+            self.alertFunc(msg: "Las contraseñas no coinciden, intente de nuevo pls")
         }
            
     }
     
+    func alertFunc(msg:String){
+        let alertController = UIAlertController(title: "Aceptar", message: msg, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
+        self.present(alertController, animated: true , completion: nil )
+    }
 
 }

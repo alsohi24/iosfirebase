@@ -7,11 +7,14 @@ target 'proydamii' do
 
   # Pods for proydamii
 
+	pod 'Firebase/Core'	
 	pod 'Firebase/Analytics'
 	pod 'Firebase/Auth'
 	pod 'Alamofire'
 	pod 'AlamofireImage', '~> 4.1'
 	pod 'SwiftyJSON'
+	pod 'Firebase/Firestore'
+	pod 'FirebaseFirestoreSwift'
 
   target 'proydamiiTests' do
     inherit! :search_paths

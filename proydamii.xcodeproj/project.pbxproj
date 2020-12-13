@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A37B4F12585F39400015B29 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A37B4F02585F39400015B29 /* File.swift */; };
 		7A45D6CED67DDB4066AEBC65 /* Pods_proydamii_proydamiiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59B2D848DE1134A154919607 /* Pods_proydamii_proydamiiUITests.framework */; };
 		9D0C2146A2229DEA1E45DB21 /* Pods_proydamii.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89057184C8D65E695D712EBC /* Pods_proydamii.framework */; };
 		C327C5132581AA3D00BE2B0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327C5122581AA3D00BE2B0B /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		18E1B1CD5CA2D59E64EBFDA5 /* Pods-proydamii.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proydamii.debug.xcconfig"; path = "Target Support Files/Pods-proydamii/Pods-proydamii.debug.xcconfig"; sourceTree = "<group>"; };
 		1A60DCAF7F7775DE3F305E13 /* Pods-proydamii-proydamiiUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proydamii-proydamiiUITests.debug.xcconfig"; path = "Target Support Files/Pods-proydamii-proydamiiUITests/Pods-proydamii-proydamiiUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		234943816F68439F0A544D41 /* Pods-proydamiiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proydamiiTests.release.xcconfig"; path = "Target Support Files/Pods-proydamiiTests/Pods-proydamiiTests.release.xcconfig"; sourceTree = "<group>"; };
+		3A37B4F02585F39400015B29 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3C5DCA4A84540E614AB5D973 /* Pods-proydamii-proydamiiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proydamii-proydamiiUITests.release.xcconfig"; path = "Target Support Files/Pods-proydamii-proydamiiUITests/Pods-proydamii-proydamiiUITests.release.xcconfig"; sourceTree = "<group>"; };
 		59B2D848DE1134A154919607 /* Pods_proydamii_proydamiiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_proydamii_proydamiiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6320B5A8C1821F4A48915753 /* Pods_proydamiiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_proydamiiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3A37B4EE2585F37300015B29 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3A37B4F02585F39400015B29 /* File.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		B7C082BA7A23C10A3FB53B44 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,8 +165,8 @@
 		C327C5112581AA3D00BE2B0B /* proydamii */ = {
 			isa = PBXGroup;
 			children = (
+				3A37B4EE2585F37300015B29 /* Utils */,
 				C327C594258483C500BE2B0B /* Auth */,
-				C327C5492581AB9200BE2B0B /* Utils */,
 				C327C5482581AB8000BE2B0B /* Models */,
 				C327C5122581AA3D00BE2B0B /* AppDelegate.swift */,
 				C327C55225834B5200BE2B0B /* apple.png */,
@@ -198,13 +208,6 @@
 				C327C54A2581AC8000BE2B0B /* Colors.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		C327C5492581AB9200BE2B0B /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		C327C594258483C500BE2B0B /* Auth */ = {
@@ -461,6 +464,7 @@
 				C327C56E2583627500BE2B0B /* View2Controller.swift in Sources */,
 				C327C54B2581AC8000BE2B0B /* Colors.swift in Sources */,
 				C327C590258483BA00BE2B0B /* AuthViewController.swift in Sources */,
+				3A37B4F12585F39400015B29 /* File.swift in Sources */,
 				C327C59E2584873200BE2B0B /* HomeViewController.swift in Sources */,
 				C327C5172581AA3D00BE2B0B /* ViewController.swift in Sources */,
 				C327C5132581AA3D00BE2B0B /* AppDelegate.swift in Sources */,
@@ -570,7 +574,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -625,7 +629,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -644,6 +648,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YVKJ589HX3;
 				INFOPLIST_FILE = proydamii/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -664,6 +669,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YVKJ589HX3;
 				INFOPLIST_FILE = proydamii/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -46,20 +46,7 @@ class AuthViewController: UIViewController {
     
     
     @IBAction func signInButtonAction(_ sender: Any) {
-        
-//        if let email = emailTextField.text , let password = passwordTextField.text {
-//            Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-//                if let result = result , error == nil {
-//
-//                    self.navigationController?
-//                    .pushViewController(HomeViewController(email: result.user.email!, provider: .basic), animated: true)
-//                }else{
-//                    let alertController = UIAlertController(title: "Aceptar", message: "Se ha producido un error registrando el usuario", preferredStyle: .alert)
-//                    alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
-//                    self.present(alertController, animated: true , completion: nil )
-//                }
-//            }
-//        }
+
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         //let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "View2Controller") as? View2Controller
@@ -89,6 +76,8 @@ class AuthViewController: UIViewController {
                 //let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as? ViewController
                 if let result = result , error == nil {
                     print(result.user.email)
+                    print(result.user.displayName)
+                    print(result.user.uid)
 
 //                    self.navigationController?
 //                        .pushViewController(HomeViewController(email: result.user.email!, name: result.user.displayName ?? ""), animated: true)
@@ -100,14 +89,20 @@ class AuthViewController: UIViewController {
                     let tabbar: UITabBarController? = (storyBoard.instantiateViewController(withIdentifier: "tabbar") as? UITabBarController)
                     self.navigationController?.pushViewController(tabbar!, animated: true)
                 }else{
-                    let alertController = UIAlertController(title: "Aceptar", message: "Se ha producido un error registrando el usuario", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
-                    self.present(alertController, animated: true , completion: nil )
+//                    let alertController = UIAlertController(title: "Aceptar", message: "Se ha producido un error registrando el usuario", preferredStyle: .alert)
+//                    alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
+//                    self.present(alertController, animated: true , completion: nil )
+                    self.alertFunc(msg:"Se ha producido un error registrando el usuario")
                 }
             }
         }     
     }
     
+    func alertFunc(msg:String){
+        let alertController = UIAlertController(title: "Aceptar", message: msg, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
+        self.present(alertController, animated: true , completion: nil )
+    }
 
 
 }
