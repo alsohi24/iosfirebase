@@ -62,14 +62,15 @@ class SignUpViewController: UIViewController,  UIPickerViewDelegate, UIPickerVie
                     changeRequest?.commitChanges { (error) in
                         self.alertFunc(msg: "Error al comitear cambios")
                     print("+++++++++++ Comiteo de cambios +++++++++++")
-                     print(error)
+                    print(error)
                     }
                     if let result = result , error == nil {
                         self.db.collection("usuarios").document().setData([
                             "nombreCompleto": self.fullname.text,
                             "email": self.email.text,
                             "tipo": self.tiposelect,
-                            "uid_id": result.user.uid
+                            "uid_id": result.user.uid,
+                            "cuenta": result.user.uid.prefix(6)
                             
                         ]) { [self] err in
                             if let err = err {
