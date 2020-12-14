@@ -6,18 +6,24 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class HomeViewController: UIViewController {
 
     public var email: String = ""
     public var name: String = ""
+    let db = Firestore.firestore()
+    var trans: [Transferencia] = []
     
-    
-     init(email: String,  name: String) {
+    @IBOutlet weak var btnTranferir: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    init(email: String,  name: String) {
         self.email = email
         self.name = name
         super.init(nibName: nil, bundle: nil)
     }
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         
@@ -25,12 +31,29 @@ class HomeViewController: UIViewController {
 
     }
     
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.btnTranferir.layer.cornerRadius = 5
+        self.tableView.layer.cornerRadius = 10
+
+        let uid_:String = UserDefaults.standard.string(forKey: "uid_id")!
+
+        self.db.collection("tranferencias")
+            .whereField("uid_id_ejecutante", isEqualTo: uid_)
+            .getDocuments { (documents, error) in
+                if error == nil && documents != nil{
+                    for doc in documents!.documents{
+                        let documentData = doc.data()
+                        print(documentData)
+                        let trans = Transferencia(monto: Int(documentData["monto"] as! String) ?? 0, destino: documentData["destino"] as! String)
+                        
+                        self.trans.append(trans)
+                        self.tableView.reloadData()
+                    }
+                }else{
+                    print("err en la llamada \(error)")
+                }
+            }
         print(self.email)
         print(self.name)
         // Do any additional setup after loading the view.
@@ -39,7 +62,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return self.trans.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,7 +70,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)  as! transTableViewCell
         //cell.monto.text = "4000"
-        cell.monto.text = "www"
+        
+        cell.monto.text = String(self.trans[indexPath.row].monto)
+        cell.cuentaDestino.text = self.trans[indexPath.row].destino
         //cell.cuentaDestino.text = "32r23r32e"
 //        if(self.provider == "Cinéfilo"){
 //            (cell as! cell1TableViewCell).title.text = self.movieData[indexPath.row].title

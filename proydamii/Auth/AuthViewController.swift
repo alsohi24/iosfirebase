@@ -74,20 +74,30 @@ class AuthViewController: UIViewController {
             Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
                 //result.user
                 //let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ViewController") as? ViewController
-                if let result = result , error == nil {
-                    print(result.user.email)
-                    print(result.user.displayName)
-                    print(result.user.uid)
+                let defaults = UserDefaults.standard
 
+                if let result = result , error == nil {
+                    print(result.user.uid)
+                    defaults.set(result.user.uid, forKey: "uid_id")
+                    defaults.set(result.user.displayName, forKey: "nombreCompleto")
+                    //defaults.set(self.email.text, forKey: "email")
 //                    self.navigationController?
 //                        .pushViewController(HomeViewController(email: result.user.email!, name: result.user.displayName ?? ""), animated: true)
                     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 
-                    let resultViewController = storyBoard.instantiateViewController(withIdentifier: "View2Controller") as! View2Controller
+                    //let resultViewController = storyBoard.instantiateViewController(withIdentifier: "View2Controller") as! View2Controller
 //                    self.navigationController?
 //                        .pushViewController(resultViewController, animated: true)
-                    let tabbar: UITabBarController? = (storyBoard.instantiateViewController(withIdentifier: "tabbar") as? UITabBarController)
-                    self.navigationController?.pushViewController(tabbar!, animated: true)
+                   
+                    if(4>1){
+                        let tabbar2: UITabBarController? = (storyBoard.instantiateViewController(withIdentifier: "tabbaradmin") as? UITabBarController)
+                        self.navigationController?.pushViewController(tabbar2!, animated: true)
+                        
+                    }else{
+                        let tabbar: UITabBarController? = (storyBoard.instantiateViewController(withIdentifier: "tabbar") as? UITabBarController)
+                        self.navigationController?.pushViewController(tabbar!, animated: true)
+                        
+                    }
                 }else{
 //                    let alertController = UIAlertController(title: "Aceptar", message: "Se ha producido un error registrando el usuario", preferredStyle: .alert)
 //                    alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))

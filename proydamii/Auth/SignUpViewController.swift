@@ -41,7 +41,7 @@ class SignUpViewController: UIViewController,  UIPickerViewDelegate, UIPickerVie
         super.viewDidLoad()
         
         self.btnSingin.layer.cornerRadius = 5
-        tpuser = ["Cinéfilo", "Seriéfilo"]
+        tpuser = ["Premium", "Normal"]
         self.tipo.delegate = self
         self.tipo.dataSource = self
     }
@@ -94,9 +94,6 @@ class SignUpViewController: UIViewController,  UIPickerViewDelegate, UIPickerVie
                         self.navigationController?.pushViewController(tabbar!, animated: true)
 
                     }else{
-//                        let alertController = UIAlertController(title: "Aceptar", message: "Se ha producido un error registrando el usuario", preferredStyle: .alert)
-//                        alertController.addAction(UIAlertAction(title: "Aceptar", style: .default))
-//                        self.present(alertController, animated: true , completion: nil )
                         self.alertFunc(msg: "Se ha producido un error registrando el usuario")
                     }
                 }
